@@ -1,27 +1,25 @@
 <script lang="ts">
-  import Hello from "$lib/components/Hello/Hello.svelte";
+  import extractFromSource from "$lib/extractFromSource";
+  import generateStorybook from "$lib/generateStorybook";
+  import type { PageData } from "./$types";
 
-  let name = "world";
+  export let data: PageData;
 
-  function onClick() {
-    name = "you";
-  }
+  // const meta = extractFromSource(data.contents, { filename: "Hello.svelte" });
+  const code = generateStorybook(data.contents);
 </script>
 
-<svelte:head>
-  <title>SvelteKit demo page</title>
-</svelte:head>
+<!-- 
+{#each meta.warnings ?? [] as warning}
+  <p>⚠️ Warning: {warning}</p>
+{/each} -->
 
-<Hello {name} on:click={onClick} />
+<pre>{code}</pre>
+<!-- <pre>{JSON.stringify(code, null, 2)}</pre> -->
 
-<div class="links">
-  <a href="/posts/1" data-sveltekit:prefetch>Api Example</a>
-</div>
-
-<style>
-  .links {
-    display: flex;
-    justify-content: center;
-    margin-top: 4rem;
-  }
-</style>
+<!-- 
+<h2>Original</h2>
+<pre>
+  {data.contents}
+</pre>
+-->

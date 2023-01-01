@@ -12,7 +12,8 @@
     "lint:tsc": "tsc --noEmit",
     "lint:eslint": "eslint --ext=js,ts,svelte --max-warnings=0 src",
     "format": "prettier --write . && eslint --ext=js,ts,svelte --fix src",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "preinstall": "npx only-allow pnpm"
   },
   "lint-staged": {
     "*.ts": [
